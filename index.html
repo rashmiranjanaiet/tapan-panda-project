@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Learnify is a Next.js online learning platform. The full app is hosted on Vercel."
+    />
+    <title>Learnify</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        color: #152033;
+        background: #f6f8fb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 32px 18px;
+      }
+
+      main {
+        width: min(920px, 100%);
+        display: grid;
+        gap: 28px;
+        align-items: center;
+        grid-template-columns: 1.05fr 0.95fr;
+      }
+
+      .content {
+        display: grid;
+        gap: 18px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: #2563eb;
+        font-size: 0.86rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.6rem, 6vw, 5rem);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      p {
+        margin: 0;
+        max-width: 58ch;
+        color: #526070;
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      a {
+        display: inline-flex;
+        min-height: 46px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        padding: 0 18px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .primary {
+        background: #2563eb;
+        color: #fff;
+        box-shadow: 0 18px 36px rgba(37, 99, 235, 0.24);
+      }
+
+      .secondary {
+        border: 1px solid #cfd8e3;
+        color: #243247;
+        background: #fff;
+      }
+
+      .preview {
+        overflow: hidden;
+        border-radius: 8px;
+        border: 1px solid #dce4ee;
+        background: #fff;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+      }
+
+      .bar {
+        display: flex;
+        gap: 7px;
+        padding: 12px;
+        border-bottom: 1px solid #e8eef5;
+      }
+
+      .bar span {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: #94a3b8;
+      }
+
+      .hero-art {
+        display: grid;
+        min-height: 330px;
+        align-content: end;
+        padding: 30px;
+        background:
+          linear-gradient(135deg, rgba(37, 99, 235, 0.12), transparent 45%),
+          #eef4ff;
+      }
+
+      .panel {
+        display: grid;
+        gap: 12px;
+        width: min(320px, 100%);
+      }
+
+      .row {
+        height: 14px;
+        border-radius: 999px;
+        background: #bfdbfe;
+      }
+
+      .row:nth-child(2) {
+        width: 78%;
+        background: #d9e7ff;
+      }
+
+      .row:nth-child(3) {
+        width: 62%;
+        background: #e6eefb;
+      }
+
+      .notice {
+        max-width: 920px;
+        margin-top: 28px;
+        color: #66768a;
+        font-size: 0.92rem;
+        text-align: center;
+      }
+
+      @media (max-width: 760px) {
+        main {
+          grid-template-columns: 1fr;
+        }
+
+        .preview {
+          order: -1;
+        }
+
+        .hero-art {
+          min-height: 210px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <main>
+        <section class="content" aria-labelledby="page-title">
+          <p class="eyebrow">Learnify</p>
+          <h1 id="page-title">Online learning, powered by AI.</h1>
+          <p>
+            This GitHub Pages site is a static entry page. The full Learnify app
+            runs on Vercel because it needs Next.js API routes, Clerk
+            authentication, Neon database access, and AI service keys.
+          </p>
+          <div class="actions">
+            <a class="primary" href="https://learnify-two-theta.vercel.app/">
+              Open Live App
+            </a>
+            <a class="secondary" href="./Learning-Platform-main/Learnify-main/README.md">
+              View Setup Notes
+            </a>
+          </div>
+        </section>
+
+        <section class="preview" aria-label="Learnify preview">
+          <div class="bar" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="hero-art">
+            <div class="panel" aria-hidden="true">
+              <div class="row"></div>
+              <div class="row"></div>
+              <div class="row"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <p class="notice">
+        To deploy the working app, import the repository into Vercel and set the
+        root directory to Learning-Platform-main/Learnify-main.
+      </p>
+    </div>
+  </body>
+</html>

@@ -1,64 +1,55 @@
-# 🧠 Learnify — Online Learning Platform
+# Learnify - Online Learning Platform
 
-**Live Demo:** [https://learnify-two-theta.vercel.app/](https://learnify-two-theta.vercel.app/)
+**Live Demo:** https://learnify-two-theta.vercel.app/
 
----
+## Overview
 
-## 🚀 Overview
+Learnify is a modern online learning platform that lets students create, explore, enroll in, and study AI-assisted courses.
 
-**Learnify** is a modern online learning platform that empowers students to learn, create, and explore their favorite courses anytime, anywhere.  
-Built with a clean and responsive UI, Learnify offers a seamless learning experience for both beginners and advanced learners.
+## Tech Stack
 
----
+| Frontend | Framework | Styling | Recommended Deployment |
+| --- | --- | --- | --- |
+| React | Next.js 15 | Tailwind CSS | Vercel |
 
-## 🌟 Features
+## Important Deployment Note
 
-- 🎓 User-friendly and responsive design
-- 📚 Explore and enroll in various online courses
-- 🧭 Interactive dashboard and learning progress tracking
-- 💡 Personalized recommendations for learners
-- ⚡ Fast, optimized, and deployed on **Vercel**
+This project is a server-side Next.js app. It uses Clerk authentication, Next.js API routes, Neon database access, and AI service keys.
 
----
+Because of that, it will not work correctly on plain GitHub Pages. GitHub Pages only serves static files and cannot run the app's API routes or middleware. Deploy this project to Vercel or another host that supports Next.js server functions.
 
-## 🛠️ Tech Stack
+## Environment Variables
 
-| Frontend           | Framework  | Styling      | Deployment |
-| ------------------ | ---------- | ------------ | ---------- |
-| React.js (Next.js) | Next.js 15 | Tailwind CSS | Vercel     |
-
----
-
-## 📸 UI Highlights
-
-- ✨ Clean gradient banner with professional look
-- 👩‍🎓 College-student themed design
-- 🎨 Smooth animations powered by Framer Motion
-- 🔍 Easy navigation and interactive components
-
-
-
-
-## ⚙️ Installation & Setup
-
-To run Learnify locally:
+Create a local `.env.local` file using `.env.example` as a guide:
 
 ```bash
-# Clone the repository
-git clone https://github.com/<your-username>/learnify.git
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+DATABASE_URL=
+GEMINI_API_KEY=
+YOUTUBE_API_KEY=
+AI_GURU_LAB_API=
+```
 
-# Navigate to project folder
-cd learnify
+## Installation and Setup
 
-# Install dependencies
-npm install
-
-# Run the development server
+```bash
+npm ci
 npm run dev
 ```
-📬 Contact
 
-👨‍💻 Developed by Vivek Saha
-📧 Email: viveksaha096@gmail.com
+Open http://localhost:3000 in your browser.
 
-🔗 Website: https://learnify-two-theta.vercel.app/
+## Build
+
+```bash
+npm run build
+```
+
+The production build requires valid Clerk and database environment variables.
+
+## Contact
+
+Developed by Vivek Saha  
+Email: viveksaha096@gmail.com  
+Website: https://learnify-two-theta.vercel.app/
