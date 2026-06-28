@@ -1,10 +1,28 @@
-// import { drizzle } from 'drizzle-orm/neon-http';
+import mongoose from "mongoose";
 
-// export const db = drizzle(process.env.DATABASE_URL);
+const MONGODB_URI = process.env.MONGODB_URI;
 
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
+if (!MONGODB_URI) {
+  throw new Error("Please define MONGODB_URI in your environment variables.");
+}
 
-const pg = neon(process.env.DATABASE_URL);
-export const db = drizzle({ client: pg });
+let cached = global.mongoose;
 
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+export async function connectDB() {
+  if (cached.conn) {
+    return cached.conn;
+  }
+
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGODB_URI, {
+      bufferCommands: false,
+    });
+  }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
+}

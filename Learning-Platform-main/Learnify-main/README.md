@@ -14,7 +14,7 @@ Learnify is a modern online learning platform that lets students create, explore
 
 ## Important Deployment Note
 
-This project is a server-side Next.js app. It uses Clerk authentication, Next.js API routes, Neon database access, and AI service keys.
+This project is a server-side Next.js app. It uses Clerk authentication, Next.js API routes, MongoDB Atlas database access, and AI service keys.
 
 Because of that, it will not work correctly on plain GitHub Pages. GitHub Pages only serves static files and cannot run the app's API routes or middleware. Deploy this project to Vercel or another host that supports Next.js server functions.
 
@@ -25,7 +25,7 @@ Create a local `.env.local` file using `.env.example` as a guide:
 ```bash
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
-DATABASE_URL=
+MONGODB_URI=
 GEMINI_API_KEY=
 YOUTUBE_API_KEY=
 AI_GURU_LAB_API=

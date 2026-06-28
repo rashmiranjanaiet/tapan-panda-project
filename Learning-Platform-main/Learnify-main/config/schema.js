@@ -1,34 +1,48 @@
-import { desc } from "drizzle-orm";
+import mongoose from "mongoose";
 
-import { boolean, integer, json, pgTable, varchar } from "drizzle-orm/pg-core";
+const userSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    subscriptionId: { type: String, default: "" },
+  },
+  { timestamps: true }
+);
 
-export const usersTable = pgTable("users", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  name: varchar({ length: 255 }).notNull(),
-  email: varchar({ length: 255 }).notNull().unique(),
-  subscriptionId:varchar()
-});
+const courseSchema = new mongoose.Schema(
+  {
+    cid: { type: String, required: true, unique: true },
+    name: { type: String, default: "" },
+    description: { type: String, default: "" },
+    noOfChapters: { type: Number, required: true },
+    includeVideo: { type: Boolean, default: false },
+    level: { type: String, required: true },
+    category: { type: String, default: "" },
+    courseJson: { type: mongoose.Schema.Types.Mixed, default: {} },
+    bannerImageUrl: { type: String, default: "" },
+    courseContent: { type: mongoose.Schema.Types.Mixed, default: [] },
+    userEmail: { type: String, required: true },
+  },
+  { timestamps: true }
+);
 
+const enrollCourseSchema = new mongoose.Schema(
+  {
+    cid: { type: String, required: true },
+    userEmail: { type: String, required: true },
+    completedChapters: { type: [Number], default: [] },
+  },
+  { timestamps: true }
+);
 
-export const coursesTable = pgTable("courses", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  cid:varchar().notNull().unique(),
-  name:varchar(),
-  description:varchar(),
-  noOfChapters:integer().notNull(),
-  includeVideo:boolean().default(false),
-  level:varchar().notNull(),
-  category:varchar(),
-  courseJson:json(),
-  bannerImageUrl:varchar().default(''),
-  courseContent:json().default({}),
-  userEmail:varchar('userEmail').references(()=>usersTable.email).notNull()
-})
+enrollCourseSchema.index({ cid: 1, userEmail: 1 }, { unique: true });
 
+export const User =
+  mongoose.models.User || mongoose.model("User", userSchema);
 
-export const enrollCourseTable=pgTable('enrollCourse',{
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  cid:varchar('cid').references(()=>coursesTable.cid),
-  userEmail:varchar('userEmail').references(()=>usersTable.email).notNull(),
-  completedChapters:json()
-})
+export const Course =
+  mongoose.models.Course || mongoose.model("Course", courseSchema);
+
+export const EnrollCourse =
+  mongoose.models.EnrollCourse ||
+  mongoose.model("EnrollCourse", enrollCourseSchema);

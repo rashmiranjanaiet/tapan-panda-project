@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
 import { ai } from "../generate-course-layout/route";
 import axios from "axios";
-import { db } from "@/config/db";
-import { coursesTable } from "@/config/schema";
-import { eq } from "drizzle-orm";
+import { connectDB } from "@/config/db";
+import { Course } from "@/config/schema";
 
 const PROMPT = `Depends on Chapter name and Topic, generate content for each topic in HTML 
 and give response in JSON format. 
@@ -24,6 +23,7 @@ User Input:
 
 export async function POST(req) {
   try {
+    await connectDB();
     const { courseJson, courseTitle, courseId } = await req.json();
 
     const promises = courseJson.chapters.map(async (chapter) => {
@@ -74,12 +74,10 @@ export async function POST(req) {
     });
 
     const CourseContent = await Promise.all(promises);
-    await db
-      .update(coursesTable)
-      .set({
-        courseContent: CourseContent,
-      })
-      .where(eq(coursesTable.cid, courseId));
+    await Course.updateOne(
+      { cid: courseId },
+      { $set: { courseContent: CourseContent } }
+    );
     return NextResponse.json({
       courseName: courseTitle,
       courseId,

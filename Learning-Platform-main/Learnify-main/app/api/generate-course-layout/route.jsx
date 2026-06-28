@@ -1,5 +1,5 @@
-import { db } from "@/config/db";
-import { coursesTable } from "@/config/schema";
+import { connectDB } from "@/config/db";
+import { Course } from "@/config/schema";
 import { currentUser } from "@clerk/nextjs/server";
 import { GoogleGenAI } from "@google/genai";
 import axios from "axios";
@@ -32,6 +32,7 @@ export const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
   });
 export async function POST(req) {
+    await connectDB();
   // To run this code you need to install the following dependencies:
   // npm install @google/genai mime
   // npm install -D @types/node
@@ -69,7 +70,7 @@ export async function POST(req) {
   
   const ImagePrompt= JSONResp.course?.bannerImagePrompt;
   const bannerImageUrl = await GenerateImage(ImagePrompt);
-  const result = await db.insert(coursesTable).values({
+  await Course.create({
     ...formData,
     courseJson:JSONResp,
     userEmail:user?.primaryEmailAddress?.emailAddress,
